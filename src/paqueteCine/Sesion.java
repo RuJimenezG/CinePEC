@@ -1,0 +1,103 @@
+package paqueteCine;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+/**
+ * Una clase para representar una sesión
+ * @version 	09/05/2021
+ * @author 		Rubén Jiménez Gutiérrez
+ */
+public class Sesion {
+	private LocalDate fecha;
+	private LocalTime hora;
+	private Pelicula pelicula;
+	private int capacidad;
+	private int butacasDisponibles;
+	private int butacasVendidas;
+	
+	/**
+	 * Crea una sesión indicando la capacidad máxima de la sala.
+	 * @param capacidad	- Número máximo de butacas que se pueden ocupar en la sala.
+	 */
+	public Sesion (int capacidad) {
+		this.capacidad = capacidad;
+		this.butacasDisponibles = capacidad;
+	}
+
+	public Sesion (LocalDate fecha, LocalTime hora, Pelicula pelicula) {
+		this.fecha = fecha;
+		this.hora = hora;
+		this.pelicula = pelicula;
+	}
+	
+	/**
+	 * Cambia la fecha en la que está programada la sesión.
+	 * @param fecha		- Fecha en la que está programada la película.
+	 */
+	public void setFecha (LocalDate fecha) {
+		this.fecha = fecha;
+	}
+	
+	/**
+	 * Cambia la hora a la que está programada la película.
+	 * @param hora		- Hora a la que está programada la película.
+	 */
+	public void setHora (LocalTime hora) {
+		this.hora = hora;
+	}
+	
+	/**
+	 * Cambia la película que se proyecta en la sesión.
+	 * @param pelicula	- Nombre de la instancia de la clase película que se proyecta.
+	 */
+	public void setPelicula (Pelicula pelicula) {
+		this.pelicula = pelicula;		
+	}
+	
+	public void setCapacidad (int capacidad) {
+		this.capacidad = capacidad;
+		butacasDisponibles = capacidad - butacasVendidas;
+	}
+	
+	/**
+	 * Devuelve una cadena de caracteres que contiene los datos de la sesión y de la película agendada con el siguiente formato:
+	 * Sesión:
+	 * 		Fecha:		Hora:		Butacas disponibles:
+	 * 		Película:
+	 * 		Año:
+	 * 		Género:
+	 * 		Director:
+	 * 		Actores:
+	 * 		Sinopsis:
+	 * @return Devuelve un String con las características descritas anteriormente.
+	 */
+	public String mostrarSesion () {		
+		return "Sesión:\n" +
+				"\tFecha: " + fecha + "\tHora: " + hora + "\tButacas disponibles: " + butacasDisponibles + "\n" +
+				"Pelicula: " + pelicula.mostrarPelicula();
+	}
+	
+	/**
+	 * Reduce la disponibilidad de butacas en la sesión tras vender un determinado número de entradas.
+	 * @param butacasVendidas	- Número de entradas o butacas que se venden.
+	 */
+	public void reducirDisponibilidad (int butacasVendidas) {
+		if (butacasVendidas <= butacasDisponibles) {
+		this.butacasVendidas += butacasVendidas;
+		butacasDisponibles -= butacasVendidas;
+		} else {
+			System.out.println("No se pueden vender " + butacasVendidas + "butacas.");
+			System.out.println("En esta sesión solo quedan " + butacasDisponibles + " butacas disponibles.");
+			System.out.println(mostrarSesion());
+		}
+	}
+	
+	/**
+	 * @return Devuelve el número de butacas aún disponibles para la sesión.
+	 */
+	public int getButacasDisponibles () {
+		return butacasDisponibles;
+	}
+	
+}
