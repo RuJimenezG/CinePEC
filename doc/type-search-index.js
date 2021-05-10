@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"paqueteCine","l":"Cartelera"},{"p":"paqueteCine","l":"LanzadorEtapa1"},{"p":"paqueteCine","l":"LanzadorEtapa21"},{"p":"paqueteCine","l":"LanzadorEtapa22"},{"p":"paqueteCine","l":"Pelicula"},{"p":"paqueteCine","l":"Sesion"},{"p":"paqueteCine","l":"TGenero"}]
