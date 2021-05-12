@@ -175,5 +175,18 @@ public class Pelicula {
 	{
 		System.out.println(mostrarPelicula());
 	}
+	
+	/**
+	 * Comprueba si dos películas son la misma. Se considera que si dos películas tienen el mismo título, entonces son la misma película.
+	 * @param titulo
+	 * @return
+	 */
+	public boolean mismaPeli(Pelicula peliculaComparar) {
+		if (this.titulo.equals(peliculaComparar.getTitulo()) ) {
+			return true;
+			} else {
+				return false;
+			}
+		}
 			
 }

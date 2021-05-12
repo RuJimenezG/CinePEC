@@ -48,7 +48,7 @@ public class Cartelera {
 		boolean _encontrada = false;
 		if (peliculas.stream()
 		.map(pelicula -> pelicula.getTitulo())
-		.anyMatch(t -> t == titulo)==true) {
+		.anyMatch(t -> t.equals(titulo))==true) {
 			_encontrada = true;
 		}
 		return _encontrada;
@@ -76,6 +76,9 @@ public class Cartelera {
 			if (!estaPelicula(pelicula.getTitulo())) {
 				peliculas.add(pelicula);
 				_algunaPeliNueva = true;
+				System.out.println("La película " + pelicula.getTitulo() + " se ha añadido a la cartelera.");
+			} else {
+				System.out.println("No se ha podido añadir la película " + pelicula.getTitulo() + " porque ya está en la cartelera.");
 			}
 		}
 		return _algunaPeliNueva;
@@ -90,9 +93,12 @@ public class Cartelera {
 	 */
 	public boolean nuevaPelicula(Pelicula pelicula) {
 		boolean _esPeliNueva = false;
-		if (!estaPelicula(pelicula.getTitulo())) {
+		if (!estaPelicula(pelicula)) {
 			peliculas.add(pelicula);
 			_esPeliNueva = true;
+			System.out.println("La película " + pelicula.getTitulo() + " se ha añadido a la cartelera.");
+		} else {
+			System.out.println("No se ha podido añadir la película " + pelicula.getTitulo() + " porque ya está en la cartelera.");
 		}
 		return _esPeliNueva;
 	}

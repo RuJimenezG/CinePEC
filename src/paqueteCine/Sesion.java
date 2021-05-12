@@ -25,10 +25,20 @@ public class Sesion {
 		this.butacasDisponibles = capacidad;
 	}
 
+	/**
+	 * Crea una sesión indicando fecha, hora y película proyectada en la misma.
+	 * @param fecha		- Fecha en la que se programa la sesión.
+	 * @param hora		- Hora en la que se programa la sesión.
+	 * @param pelicula	- Película que se proyecta.
+	 */
 	public Sesion (LocalDate fecha, LocalTime hora, Pelicula pelicula) {
 		this.fecha = fecha;
 		this.hora = hora;
 		this.pelicula = pelicula;
+	}
+	
+	public LocalDate getFecha() {
+		return fecha;
 	}
 	
 	/**
@@ -37,6 +47,10 @@ public class Sesion {
 	 */
 	public void setFecha (LocalDate fecha) {
 		this.fecha = fecha;
+	}
+	
+	public LocalTime getHora() {
+		return hora;
 	}
 	
 	/**
@@ -53,6 +67,10 @@ public class Sesion {
 	 */
 	public void setPelicula (Pelicula pelicula) {
 		this.pelicula = pelicula;		
+	}
+	
+	public Pelicula getPelicula() {
+		return pelicula;
 	}
 	
 	public void setCapacidad (int capacidad) {

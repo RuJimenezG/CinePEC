@@ -94,11 +94,13 @@ public class LanzadorEtapa31 {
 		app.mostrarSesiones(p4.getTitulo());
 				
 		//Quitamos la sesión de la p4
-		//app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(14, 00));
-		//app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(17, 00));
-				
+		app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(14, 00));
+		app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(17, 00));
+		//Mostramos las sesiones de p4 para comprobar que se ha eliminado la existente
+		app.mostrarSesiones(p4.getTitulo());
+		
 		//Quitamos todas las sesiones de la p3
-		//app.quitarSesiones(p3.getTitulo());
+		app.quitarSesiones(p3.getTitulo());
 		app.mostrarSesiones(p3.getTitulo());
 				
 		//Quitamos la película p1
