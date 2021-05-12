@@ -54,12 +54,15 @@ public class Cartelera {
 		return _encontrada;
 	}
 	
+	/**
+	 * Comprueba si ya existe en la cartelera una película con el título indicado.
+	 * @param pelicula - Nombre de la instancia de la clase película que se quiere buscar.
+	 * @return Devuelve true si la película buscada está en la cartelera. Si no devuelve false.
+	 */
 	public boolean estaPelicula (Pelicula pelicula) {
-		boolean _encontrada = false;
 		if (peliculas.contains(pelicula)) {
-			_encontrada = true;
-		}
-		return _encontrada;
+			return true;
+		} else return false;
 	}
 	
 	/**
@@ -73,7 +76,7 @@ public class Cartelera {
 	public boolean nuevaPelicula(List<Pelicula> lista) {
 		boolean _algunaPeliNueva = false;
 		for (Pelicula pelicula : lista) {
-			if (!estaPelicula(pelicula.getTitulo())) {
+			if (!estaPelicula(pelicula)) {
 				peliculas.add(pelicula);
 				_algunaPeliNueva = true;
 				System.out.println("La película " + pelicula.getTitulo() + " se ha añadido a la cartelera.");
@@ -92,15 +95,14 @@ public class Cartelera {
 	 * En caso contrario devuelve false.
 	 */
 	public boolean nuevaPelicula(Pelicula pelicula) {
-		boolean _esPeliNueva = false;
 		if (!estaPelicula(pelicula)) {
 			peliculas.add(pelicula);
-			_esPeliNueva = true;
 			System.out.println("La película " + pelicula.getTitulo() + " se ha añadido a la cartelera.");
+			return true;
 		} else {
 			System.out.println("No se ha podido añadir la película " + pelicula.getTitulo() + " porque ya está en la cartelera.");
+			return false;
 		}
-		return _esPeliNueva;
 	}
 	
 	/**
@@ -137,6 +139,8 @@ public class Cartelera {
 			});*/
 		return _cartelera;
 	}
+	
+
 
 	
 }

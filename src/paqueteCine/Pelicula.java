@@ -177,16 +177,21 @@ public class Pelicula {
 	}
 	
 	/**
-	 * Comprueba si dos películas son la misma. Se considera que si dos películas tienen el mismo título, entonces son la misma película.
-	 * @param titulo
-	 * @return
+	 * Comprueba si dos películas son la misma. Se considera que si dos películas tienen el mismo título, entonces son la misma película.<br>
+	 * <b>Sobreescribe</b> el metodo equals de la clase Object.
+	 * @param peliculaComparar	- Nombre de la instancia de la clase película que se quiere comparar con otra.
+	 * @return Devuelve true en caso de que las películas compartan título y false en caso contrario.
 	 */
-	public boolean mismaPeli(Pelicula peliculaComparar) {
+	public boolean equals(Pelicula peliculaComparar) {
 		if (this.titulo.equals(peliculaComparar.getTitulo()) ) {
 			return true;
-			} else {
-				return false;
-			}
+			} else return false;
 		}
+	
+	/*public boolean equals (String tituloPeliculaComparar) {
+		if (this.titulo.equals(tituloPeliculaComparar)) {
+			return true;
+		}
+	}*/
 			
 }

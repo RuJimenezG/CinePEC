@@ -74,7 +74,7 @@ public class AplicacionGestionCine {
 	 * @return Devuelve un String con las características descritas anteriormente.
 	 */
 	public void visualizarCartelera() {
-		System.out.println("\n########## CARTELERA C1 ##########\n" + cartelera.mostrarCartelera());
+		System.out.println("\n########## CARTELERA C1 ##########\n\n" + cartelera.mostrarCartelera());
 	}
 
 	/**
@@ -85,8 +85,13 @@ public class AplicacionGestionCine {
 	 *               añadir.
 	 */
 	public void nuevaSesion(Sesion sesion) {
-		sesion.setCapacidad(capacidad);
-		sesiones.add(sesion);
+		if (sesiones.contains(sesion)) {
+			System.out.println("Esta sesión ya existe y no se ha podido crear.");
+		} else {
+			sesion.setCapacidad(capacidad);
+			sesiones.add(sesion);
+			System.out.println("Se ha creado una sesión con una capacidad de " + capacidad + " butacas.");
+		}
 	}
 
 	/**
@@ -98,9 +103,17 @@ public class AplicacionGestionCine {
 	 * @param pelicula - Película que se proyecta.
 	 */
 	public void nuevaSesion(LocalDate fecha, LocalTime hora, Pelicula pelicula) {
-		Sesion sesion = new Sesion(fecha, hora, pelicula);
-		sesion.setCapacidad(capacidad);
-		sesiones.add(sesion);
+		if (sesiones.stream().map(sesion -> sesion.getFecha()).anyMatch(f -> f.equals(fecha))
+				&& sesiones.stream().map(sesion -> sesion.getHora()).anyMatch(f -> f.equals(hora))) {
+			System.out.println("No se puede cear la sesión. Ya existe una proyección programada el día " + fecha
+					+ " a las " + hora + ".\n");
+		} else {
+			Sesion sesion = new Sesion(fecha, hora, pelicula);
+			sesion.setCapacidad(capacidad);
+			sesiones.add(sesion);
+			System.out.println("Se ha creado la siguiente sesión:\n");
+			System.out.println(sesion.mostrarSesion());
+		}
 	}
 
 	/**
@@ -132,22 +145,51 @@ public class AplicacionGestionCine {
 	 * tituloBuscado); } }); }
 	 */
 
-	public void quitarSesion(String titulo, LocalDate fecha, LocalTime hora) {
+	public boolean quitarSesion(String titulo, LocalDate fecha, LocalTime hora) {
 		if (sesiones.removeIf(sesion -> sesion.getPelicula().getTitulo().equals(titulo)
 				&& sesion.getFecha().equals(fecha) && sesion.getHora().equals(hora))) {
-			System.out.println("Se ha eliminado la sesión de la película " + titulo + " el día " + fecha + " a las " + hora + "\n");
+			System.out.println("Se ha eliminado la sesión de la película " + titulo + " el día " + fecha + " a las "
+					+ hora + "\n");
+			return true;
 		} else {
-			System.out.println(
-					"No existe ninguna proyección de la película " + titulo + " el día " + fecha + " a las " + hora + "\n");
-		};
+			System.out.println("No existe ninguna proyección de la película " + titulo + " el día " + fecha + " a las "
+					+ hora + "\n");
+			return false;
+		}
 	}
-	
-	public void quitarSesiones(String titulo) {
+
+	public boolean quitarSesiones(String titulo) {
 		if (sesiones.removeIf(sesion -> sesion.getPelicula().getTitulo().equals(titulo))) {
-			System.out.println("Se han eliminado todas las sesiones de la película " + titulo + "\n");
+			System.out.println("Se han eliminado todas las sesiones de la película " + titulo + ".\n");
+			return true;
 		} else {
-			System.out.println("No existe ninguna sesión de la película " + titulo + "\n");
+			System.out.println("No existe ninguna sesión de la película " + titulo + ".\n");
+			return false;
 		}
 	};
 
+	public boolean eliminarPelicula(String titulo) {
+		if (cartelera.estaPelicula(titulo)) {
+			cartelera.eliminarPelicula(titulo);
+			System.out.println("Se ha eliminado de la cartelera la película " + titulo + ".\n");
+			quitarSesiones(titulo);
+			return (cartelera.eliminarPelicula(titulo));
+		} else {
+			System.out.println("No existe en la cartelera la película " + titulo + ".\n");
+			return cartelera.eliminarPelicula(titulo);
+		}
+	}
+
+	public void comprarEntradas(int cantidad, String titulo, LocalDate fecha, LocalTime hora) {
+		/*
+		 * int _disponibles = sesiones.stream().filter(s ->
+		 * s.getFecha().equals(fecha)).filter(s -> s.getHora().equals(hora)).;
+		 */
+		for (Sesion sesion : sesiones) {
+			if (sesion.getPelicula().getTitulo().equals(titulo) && sesion.getFecha().equals(fecha)
+					&& sesion.getHora().equals(hora)) {
+				sesion.reducirDisponibilidad(cantidad);
+			} else System.out.println("No existe una sesión de la película " + titulo + " el día " + fecha + " a las " + hora);
+		}
+	}
 }

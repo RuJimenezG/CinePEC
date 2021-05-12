@@ -156,6 +156,9 @@ public class LanzadorEtapa32 {
 		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(17, 00));
 		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
 		//app.mostrarSesiones(p2.getTitulo());
+		
+		
+		AplicacionGestionCine.
 	}
 
 }

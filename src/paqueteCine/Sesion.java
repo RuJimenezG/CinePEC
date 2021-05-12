@@ -118,4 +118,8 @@ public class Sesion {
 		return butacasDisponibles;
 	}
 	
+	public int getButacasVendidas() {
+		return butacasVendidas;
+	}
+	
 }

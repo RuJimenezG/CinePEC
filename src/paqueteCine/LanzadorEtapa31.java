@@ -105,19 +105,19 @@ public class LanzadorEtapa31 {
 				
 		//Quitamos la película p1
 		app.visualizarCartelera();
-		//app.eliminarPelicula(p1.getTitulo());
-		//app.visualizarCartelera();
-		//app.eliminarPelicula(p1.getTitulo());
+		app.eliminarPelicula(p1.getTitulo());
+		app.visualizarCartelera();
+		app.eliminarPelicula(p1.getTitulo());
 		app.mostrarSesiones(p1.getTitulo());
 				
 		//compramos entradas para la sesion de la pelicula p2
 		app.nuevaPelicula(p2);
 		app.nuevaSesion(s3);
 		app.mostrarSesiones(p2.getTitulo());
-		//app.comprarEntradas(52, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
-		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(17, 00));
-		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
-		//app.mostrarSesiones(p2.getTitulo());
+		app.comprarEntradas(52, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
+		app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(17, 00));
+		app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
+		app.mostrarSesiones(p2.getTitulo());
 	}
 
 }
