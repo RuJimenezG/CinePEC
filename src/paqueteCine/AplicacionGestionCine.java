@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Una clase que permite realizar la gestión del cine.
+ * Una clase que permite realizar la gestión del cine. Puede contener una
+ * cartelera y un listado de sesiones. Tiene una capacidad fija que se define al
+ * crear la instancia.
  * 
  * @version 11/05/2021
  * @author Rubén Jiménez Gutiérrez
@@ -45,8 +47,7 @@ public class AplicacionGestionCine {
 	/**
 	 * Añade una película a la cartelera del cine.
 	 * 
-	 * @param pelicula - Es el nombre de la instancia de la clase película que se
-	 *                 quiere añadir.
+	 * @param pelicula - Es la instancia de la clase película que se quiere añadir.
 	 * @return Devuelve true cuando se ha añadido la película a la cartelera.
 	 */
 	public boolean nuevaPelicula(Pelicula pelicula) {
@@ -58,8 +59,7 @@ public class AplicacionGestionCine {
 	 * preexistente. Para cada película del listado se comprueba primero si dicha
 	 * película no está ya en el listado. De ser así se añade.
 	 * 
-	 * @param lista Nombre de la instancia del objeto lista que contiene las
-	 *              películas a añadir.
+	 * @param lista Instancia del objeto lista que contiene las películas a añadir.
 	 * @return Devuelve true cuando se ha añadido alguna película.
 	 */
 	public boolean nuevaPelicula(List<Pelicula> lista) {
@@ -87,10 +87,13 @@ public class AplicacionGestionCine {
 	public void nuevaSesion(Sesion sesion) {
 		if (sesiones.contains(sesion)) {
 			System.out.println("Esta sesión ya existe y no se ha podido crear.");
-		} else {
+		} else if (cartelera.contains(sesion.getPelicula())) {
 			sesion.setCapacidad(capacidad);
 			sesiones.add(sesion);
-			System.out.println("Se ha creado una sesión con una capacidad de " + capacidad + " butacas.");
+			System.out.println("Se ha creado una nueva sesión con una capacidad de " + capacidad + " butacas.");
+		} else {
+			System.out.println("La película " + sesion.getPelicula().getTitulo() + " no se encuentra en la cartelera.");
+			System.out.println("Por favor, añada la película a la cartelera y después cree la sesión.");
 		}
 	}
 
@@ -107,12 +110,16 @@ public class AplicacionGestionCine {
 				&& sesiones.stream().map(sesion -> sesion.getHora()).anyMatch(f -> f.equals(hora))) {
 			System.out.println("No se puede cear la sesión. Ya existe una proyección programada el día " + fecha
 					+ " a las " + hora + ".\n");
-		} else {
+		} else if (cartelera.contains(pelicula)) {
 			Sesion sesion = new Sesion(fecha, hora, pelicula);
 			sesion.setCapacidad(capacidad);
 			sesiones.add(sesion);
 			System.out.println("Se ha creado la siguiente sesión:\n");
 			System.out.println(sesion.mostrarSesion());
+		} else {
+			System.out.println("No se ha podido crear la sesión.");
+			System.out.println("La película " + pelicula.getTitulo() + " no se encuentra en la cartelera.");
+			System.out.println("Por favor, añada la película a la cartelera y después cree la sesión.");
 		}
 	}
 
@@ -136,15 +143,18 @@ public class AplicacionGestionCine {
 		}
 	}
 
-	/*
-	 * { boolean _peliEncontrada =false; sesiones.forEach(sesion -> { if
-	 * (sesion.getPelicula().getTitulo().equals(tituloBuscado)) {
-	 * System.out.println(sesion.mostrarSesion()); _peliEncontrada = true; } else if
-	 * (!_peliEncontrada) {
-	 * System.out.println("No hay ninguna sesión programada para la película " +
-	 * tituloBuscado); } }); }
+	/**
+	 * Elimina una sesión a una fecha y hora determinadas de una película según su
+	 * título.
+	 * 
+	 * @param titulo - Nombre que identifica a la película.
+	 * @param fecha  - Fecha a la que está programada la sesión que se quiere
+	 *               elminar.
+	 * @param hora   - Hora a la que está programada la sesión que se quiere
+	 *               eliminar.
+	 * @return Devuelve verdadero si se ha podido eliminar la sesión y falso en caso
+	 *         contrario.
 	 */
-
 	public boolean quitarSesion(String titulo, LocalDate fecha, LocalTime hora) {
 		if (sesiones.removeIf(sesion -> sesion.getPelicula().getTitulo().equals(titulo)
 				&& sesion.getFecha().equals(fecha) && sesion.getHora().equals(hora))) {
@@ -158,6 +168,14 @@ public class AplicacionGestionCine {
 		}
 	}
 
+	/**
+	 * Elimina todas las sesiones de una película determinada.
+	 * 
+	 * @param titulo - Nombre de la película de la que se desean eliminar las
+	 *               sesiones.
+	 * @return Devuelve verdadero si se eliminan las sesiones y falso en caso
+	 *         contrario.
+	 */
 	public boolean quitarSesiones(String titulo) {
 		if (sesiones.removeIf(sesion -> sesion.getPelicula().getTitulo().equals(titulo))) {
 			System.out.println("Se han eliminado todas las sesiones de la película " + titulo + ".\n");
@@ -168,10 +186,18 @@ public class AplicacionGestionCine {
 		}
 	};
 
+	/**
+	 * Elimina una película de la cartelera del cine. Además elimina todas las
+	 * sesiones de esta película.
+	 * 
+	 * @param titulo - Nombre de la película que se quiere eliminar.
+	 * @return Devuelve verdadero si se elimina la película y falso en caso
+	 *         contrario.
+	 */
 	public boolean eliminarPelicula(String titulo) {
 		if (cartelera.estaPelicula(titulo)) {
 			cartelera.eliminarPelicula(titulo);
-			System.out.println("Se ha eliminado de la cartelera la película " + titulo + ".\n");
+			System.out.println("Se ha eliminado de la cartelera la película " + titulo + ".");
 			quitarSesiones(titulo);
 			return (cartelera.eliminarPelicula(titulo));
 		} else {
@@ -180,16 +206,28 @@ public class AplicacionGestionCine {
 		}
 	}
 
+	/**
+	 * Permite descontar un número de entradas de la sesión elegida.
+	 * @param cantidad - Número de entradas que se descuentan.
+	 * @param titulo - Título de la película a la que pertenece la sesión de la que se quieren comprar entradas.
+	 * @param fecha - Fecha a la que está programada la sesión de la que se quieren comprar entradas.
+	 * @param hora - Hora a la que está programada la sesión de la que se quieren comprar entradas.
+	 */
 	public void comprarEntradas(int cantidad, String titulo, LocalDate fecha, LocalTime hora) {
-		/*
-		 * int _disponibles = sesiones.stream().filter(s ->
-		 * s.getFecha().equals(fecha)).filter(s -> s.getHora().equals(hora)).;
-		 */
+		boolean _encontrada = false;
 		for (Sesion sesion : sesiones) {
 			if (sesion.getPelicula().getTitulo().equals(titulo) && sesion.getFecha().equals(fecha)
 					&& sesion.getHora().equals(hora)) {
-				sesion.reducirDisponibilidad(cantidad);
-			} else System.out.println("No existe una sesión de la película " + titulo + " el día " + fecha + " a las " + hora);
+				_encontrada = true;
+				if (sesion.reducirDisponibilidad(cantidad)) {
+					System.out.println("Se han vendido " + cantidad + " entradas de la sesión:\n");
+					System.out.println("Pelicula: " + titulo + "\n\tFecha: " + fecha + "\tHora: " + hora);
+				}
+			}
+		}
+		if (!_encontrada) {
+			System.out.println(
+					"No existe una sesión de la película " + titulo + " el día " + fecha + " a las " + hora + "\n");
 		}
 	}
 }

@@ -90,7 +90,7 @@ public class LanzadorEtapa32 {
 		// Invocamos operaciones
 		app.mostrarSesiones(p5.getTitulo());
 		app.mostrarSesiones(p6.getTitulo());
-		//app.comprarEntradas(5, p5.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(22, 00));
+		app.comprarEntradas(5, p5.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(22, 00));
 		app.mostrarSesiones(p5.getTitulo());
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ public class LanzadorEtapa32 {
 		app.nuevaPelicula(p1);
 		
 		//Eliminamos la película 2
-		//app.eliminarPelicula(p2.getTitulo());
+		app.eliminarPelicula(p2.getTitulo());
 		app.visualizarCartelera();
 		
 		//Cremos distintas sesiones y las añadimos
@@ -134,31 +134,33 @@ public class LanzadorEtapa32 {
 		app.mostrarSesiones(p4.getTitulo());
 		
 		//Quitamos la sesión de la p4
-		//app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(14, 00));
-		//app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(17, 00));
+		app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(14, 00));
+		app.quitarSesion(p4.getTitulo(), LocalDate.of(2020,3,22), LocalTime.of(17, 00));
 		
 		//Quitamos todas las sesiones de la p3
-		//app.quitarSesiones(p3.getTitulo());
+		app.quitarSesiones(p3.getTitulo());
 		app.mostrarSesiones(p3.getTitulo());
 		
 		//Quitamos la película p1
 		app.visualizarCartelera();
-		//app.eliminarPelicula(p1.getTitulo());
-		//app.visualizarCartelera();
-		//app.eliminarPelicula(p1.getTitulo());
+		app.eliminarPelicula(p1.getTitulo());
+		app.visualizarCartelera();
+		app.eliminarPelicula(p1.getTitulo());
 		app.mostrarSesiones(p1.getTitulo());
 		
 		//compramos entradas para la sesion de la pelicula p2
 		app.nuevaPelicula(p2);
 		app.nuevaSesion(s3);
 		app.mostrarSesiones(p2.getTitulo());
-		//app.comprarEntradas(52, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
-		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(17, 00));
-		//app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
-		//app.mostrarSesiones(p2.getTitulo());
+		app.comprarEntradas(52, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
+		app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(17, 00));
+		app.comprarEntradas(10, p2.getTitulo(), LocalDate.of(2020,3,19), LocalTime.of(18, 00));
+		app.mostrarSesiones(p2.getTitulo());
 		
+		///////////////////////////////////////////////////////////
+		//Intentamos crear una sesión el mismo día a la misma hora que otra
+		app.nuevaSesion(LocalDate.of(2020,3,19), LocalTime.of(18, 00), p2);
 		
-		AplicacionGestionCine.
 	}
 
 }
