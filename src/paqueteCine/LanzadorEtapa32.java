@@ -160,6 +160,82 @@ public class LanzadorEtapa32 {
 		///////////////////////////////////////////////////////////
 		//Intentamos crear una sesión el mismo día a la misma hora que otra
 		app.nuevaSesion(LocalDate.of(2020,3,19), LocalTime.of(18, 00), p2);
+		//Creamos un par de películas nuevas
+		Pelicula p7 = new Pelicula("Viuda Negra",2021,"Cate Shortland","Scarlett Johansson, Florence Pugh, David Harbour, "
+				+ "Rachel Weisz, O. T. Fagbenle, William Hurt, Ray Winstone","Al nacer, la Viuda Negra, "
+						+ "también conocida como Natasha Romanova, se entrega a la KGB para convertirse "
+						+ "en su agente definitivo. Cuando la URSS se separa, el gobierno intenta matarla "
+						+ "mientras la acción se traslada a la actual Nueva York.",TGenero.ACCION);
+		
+		Pelicula p8 = new Pelicula();
+		p8.setTitulo("Nadie");
+		p8.setAnyo(2021);
+		p8.setDirector("Ilya Naishuller");
+		p8.setActores("Bob Odenkirk, Connie Nielsen, Aleksey Serebryakov, Christopher Lloyd, Michael Ironside, Colin Salmon");
+		p8.setGenero(TGenero.ACCION);
+		p8.setSinopsis("Una noche, cuando dos ladrones entran en su casa, Hutch decide no actuar y no trata de defenderse "
+				+ "ni al él mismo ni a su familia, convencido de que solo así evitará una escalada de violencia. "
+				+ "Tras el ataque, su hija adolescente Blake (Gage Munroe, La cabaña) no oculta su decepción, "
+				+ "y su esposa Becca (Connie Nielsen, Wonder Woman) se aleja todavía más.");
+				
+		Pelicula p9 = new Pelicula("Her",2013,"Spike Jonze","Joaquin Phoenix, Scarlett Johansson",
+				"Un escritor en horas bajas se enamora de una Inteligencia Artificial.",TGenero.DRAMA);
+		
+		PeliculaVO p10 = new PeliculaVO();
+		p10.setIdioma(TIdioma.ingles);
+		p10.setTitulo("Warcraft: Origin");
+		p10.setAnyo(2016);
+		p10.setDirector("Duncan Jones");
+		p10.setActores("Travis Fimmel, Paula Patton, Ben Foster, Dominic Cooper, Toby Kebbell, Ben Schnetzer, Rob Kazinsky, Daniel Wu");
+		p10.setGenero(TGenero.ACCION);
+		p10.setSinopsis("A young wizard named Khadgar (Ben Schnetzer) has decided \"\r\n"
+				+ "+ \"rebel against the elders that make up the Kirin Tor in search of\"\r\n"
+				+ "+ \"a higher truth. Azeroth is about to face war,\"\r\n"
+				+ "+ \"and the search for young Khadgar will cause him to meet Commander Lothar,\"\r\n"
+				+ "+ \"an encounter that will change the destiny of both.");
+		//Creamos sesiones para todas ellas
+		app.nuevaSesion(LocalDate.of(2021,5,15), LocalTime.of(16, 00), p7);
+		app.nuevaSesion(LocalDate.of(2021,5,15), LocalTime.of(18, 00), p7);
+		app.nuevaSesion(LocalDate.of(2021,5,15), LocalTime.of(20, 00), p9);
+		app.nuevaSesion(LocalDate.of(2021,5,15), LocalTime.of(22, 00), p8);
+		app.nuevaSesion(LocalDate.of(2021,5,16), LocalTime.of(16, 00), p9);
+		app.nuevaSesion(LocalDate.of(2021,5,16), LocalTime.of(18, 00), p9);
+		app.nuevaSesion(LocalDate.of(2021,5,16), LocalTime.of(20, 00), p10);
+		app.nuevaSesion(LocalDate.of(2021,5,16), LocalTime.of(22, 00), p10);
+		//Mostramos las sesiones
+		app.mostrarSesiones(p7.getTitulo());
+		app.mostrarSesiones(p8.getTitulo());
+		app.mostrarSesiones(p9.getTitulo());
+		app.mostrarSesiones(p10.getTitulo());
+		//Intentamos borrar una sesión que no existe
+		app.quitarSesion(p10.getTitulo(), LocalDate.of(2021, 5, 15), LocalTime.of(16, 00));
+		//Intentamos quitar una sesión que si existe
+		app.quitarSesion(p7.getTitulo(), LocalDate.of(2021, 5, 15), LocalTime.of(16, 00));
+		//Quitamos todas las sesiones de todas las películas 1 a 5
+		app.quitarSesiones(p1.getTitulo());
+		app.quitarSesiones(p2.getTitulo());
+		app.quitarSesiones(p3.getTitulo());
+		app.quitarSesiones(p4.getTitulo());
+		app.quitarSesiones(p5.getTitulo());
+		//Intentamos mostrar las sesiones
+		app.mostrarSesiones(p1.getTitulo());
+		app.mostrarSesiones(p2.getTitulo());
+		app.mostrarSesiones(p3.getTitulo());
+		app.mostrarSesiones(p4.getTitulo());
+		app.mostrarSesiones(p5.getTitulo());
+		//Quitamos las películas 6 a 10
+		app.eliminarPelicula(p6.getTitulo());
+		app.eliminarPelicula(p7.getTitulo());
+		app.eliminarPelicula(p8.getTitulo());
+		app.eliminarPelicula(p9.getTitulo());
+		app.eliminarPelicula(p10.getTitulo());
+		//Mostramos la cartelera y las sesiones
+		app.visualizarCartelera();
+		app.mostrarSesiones(p6.getTitulo());
+		app.mostrarSesiones(p7.getTitulo());
+		app.mostrarSesiones(p8.getTitulo());
+		app.mostrarSesiones(p9.getTitulo());
+		app.mostrarSesiones(p10.getTitulo());
 		
 	}
 
