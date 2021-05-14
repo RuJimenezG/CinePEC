@@ -37,14 +37,6 @@ public class AplicacionGestionCine {
 	}
 
 	/**
-	 * @return Devuelve la capacidad de la sala, es decir el número de butacas de
-	 *         que dispone.
-	 */
-	public int getCapacidad() {
-		return capacidad;
-	}
-
-	/**
 	 * Añade una película a la cartelera del cine.
 	 * 
 	 * @param pelicula - Es la instancia de la clase película que se quiere añadir.
@@ -71,7 +63,6 @@ public class AplicacionGestionCine {
 	 * películas con el siguiente formato: Título de la película Año: Genero:
 	 * Director: Actores: Sinopsis:
 	 * 
-	 * @return Devuelve un String con las características descritas anteriormente.
 	 */
 	public void visualizarCartelera() {
 		System.out.println("\n########## CARTELERA C1 ##########\n\n" + cartelera.mostrarCartelera());
@@ -87,7 +78,7 @@ public class AplicacionGestionCine {
 	public void nuevaSesion(Sesion sesion) {
 		if (sesiones.contains(sesion)) {
 			System.out.println("Esta sesión ya existe y no se ha podido crear.");
-		} else if (cartelera.contains(sesion.getPelicula())) {
+		} else if (cartelera.estaPelicula(sesion.getPelicula())) {
 			sesion.setCapacidad(capacidad);
 			sesiones.add(sesion);
 			System.out.println("Se ha creado una nueva sesión con una capacidad de " + capacidad + " butacas.");
@@ -110,7 +101,7 @@ public class AplicacionGestionCine {
 				&& sesiones.stream().map(sesion -> sesion.getHora()).anyMatch(f -> f.equals(hora))) {
 			System.out.println("No se puede cear la sesión. Ya existe una proyección programada el día " + fecha
 					+ " a las " + hora + ".\n");
-		} else if (cartelera.contains(pelicula)) {
+		} else if (cartelera.estaPelicula(pelicula)) {
 			Sesion sesion = new Sesion(fecha, hora, pelicula);
 			sesion.setCapacidad(capacidad);
 			sesiones.add(sesion);

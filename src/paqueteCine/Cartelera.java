@@ -148,17 +148,4 @@ public class Cartelera {
 		return _cartelera;
 	}
 
-	/**
-	 * Comprueba si una película está incluida en la cartelera.
-	 * 
-	 * @param pelicula - Instancia de la clase película que se quiere buscar dentro
-	 *                 de la cartelera.
-	 */
-	public boolean contains(Pelicula pelicula) {
-		if (peliculas.contains(pelicula)) {
-			return true;
-		} else
-			return false;
-	}
-
 }

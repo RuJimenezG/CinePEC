@@ -58,19 +58,47 @@ public class Pelicula {
 	}
 
 	/**
+	 * @return Devuelve el año de estreno.
+	 */
+	public int getAnyo() {
+		return anyo;
+	}
+
+	/**
+	 * @return Devuelve el director de la película.
+	 */
+	public String getDirector() {
+		return director;
+	}
+
+	/**
+	 * @return Devuelve los actores de la película.
+	 */
+	public String getActores() {
+		return actores;
+	}
+
+	/**
+	 * @return Devuelve la sinopsis de la película.
+	 */
+	public String getSinopsis() {
+		return sinopsis;
+	}
+
+	/**
+	 * @return Devuelve el genero de la película.
+	 */
+	public TGenero getGenero() {
+		return genero;
+	}
+
+	/**
 	 * Cambia el título de la película.
 	 * 
 	 * @param titulo - Nombre que identifica la película.
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-
-	/**
-	 * @return Devuelve el año de estreno.
-	 */
-	public int getAnyo() {
-		return anyo;
 	}
 
 	/**
@@ -83,26 +111,12 @@ public class Pelicula {
 	}
 
 	/**
-	 * @return Devuelve el director de la película.
-	 */
-	public String getDirector() {
-		return director;
-	}
-
-	/**
 	 * Cambia el director de la película,
 	 * 
 	 * @param director - Nombre de la persona que dirige la película.
 	 */
 	public void setDirector(String director) {
 		this.director = director;
-	}
-
-	/**
-	 * @return Devuelve los actores de la película.
-	 */
-	public String getActores() {
-		return actores;
 	}
 
 	/**
@@ -115,26 +129,12 @@ public class Pelicula {
 	}
 
 	/**
-	 * @return Devuelve la sinopsis de la película.
-	 */
-	public String getSinopsis() {
-		return sinopsis;
-	}
-
-	/**
 	 * Cambia la sinopsis de la película.
 	 * 
 	 * @param sinopsis - Breve resumen del argumento.
 	 */
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
-	}
-
-	/**
-	 * @return Devuelve el genero de la película.
-	 */
-	public TGenero getGenero() {
-		return genero;
 	}
 
 	/**
@@ -157,13 +157,6 @@ public class Pelicula {
 	public String mostrarPelicula() {
 		return titulo + "\n" + "\tAño: " + anyo + "\n\tGenero: " + genero + "\n\tDirector: " + director
 				+ "\n\tActores: " + actores + "\n\tSinopsis: " + sinopsis + "\n";
-	}
-
-	/**
-	 * Imprime los datos de la película.
-	 */
-	public void printPelicula() {
-		System.out.println(mostrarPelicula());
 	}
 
 	/**

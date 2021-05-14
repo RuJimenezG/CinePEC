@@ -50,20 +50,42 @@ public class Sesion {
 	}
 
 	/**
+	 * @return Devuelve la hora a la que está programada la sesión como un objeto
+	 *         LocalTime.
+	 */
+	public LocalTime getHora() {
+		return hora;
+	}
+
+	/**
+	 * @return Devuelve el número de butacas aún disponibles para la sesión.
+	 */
+	public int getButacasDisponibles() {
+		return butacasDisponibles;
+	}
+
+	/**
+	 * @return Devuelve el número de butacas vendidas como un int.
+	 */
+	public int getButacasVendidas() {
+		return butacasVendidas;
+	}
+
+	/**
+	 * @return Devuelve la película que está programada en la sesión como un objeto
+	 *         de la clase Pelicula.
+	 */
+	public Pelicula getPelicula() {
+		return pelicula;
+	}
+
+	/**
 	 * Cambia la fecha en la que está programada la sesión.
 	 * 
 	 * @param fecha - Fecha en la que está programada la película.
 	 */
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
-	}
-
-	/**
-	 * @return Devuelve la hora a la que está programada la sesión como un objeto
-	 *         LocalTime.
-	 */
-	public LocalTime getHora() {
-		return hora;
 	}
 
 	/**
@@ -85,15 +107,8 @@ public class Sesion {
 	}
 
 	/**
-	 * @return Devuelve la película que está programada en la sesión como un objeto
-	 *         de la clase Pelicula.
-	 */
-	public Pelicula getPelicula() {
-		return pelicula;
-	}
-
-	/**
 	 * Modifica la capacidad de la sesión.
+	 * 
 	 * @param capacidad - Nueva capacidad que se quiere dar a la sesión.
 	 */
 	public void setCapacidad(int capacidad) {
@@ -118,6 +133,7 @@ public class Sesion {
 	 * número de entradas.
 	 * 
 	 * @param butacasVendidas - Número de entradas o butacas que se venden.
+	 * @return Devuelve true si se venden las butacas y false en caso contrario.
 	 */
 	public boolean reducirDisponibilidad(int butacasVendidas) {
 		if (butacasVendidas <= butacasDisponibles) {
@@ -131,19 +147,4 @@ public class Sesion {
 			return false;
 		}
 	}
-
-	/**
-	 * @return Devuelve el número de butacas aún disponibles para la sesión.
-	 */
-	public int getButacasDisponibles() {
-		return butacasDisponibles;
-	}
-	
-	/**
-	 * @return Devuelve el número de butacas vendidas como un int.
-	 */
-	public int getButacasVendidas() {
-		return butacasVendidas;
-	}
-
 }
